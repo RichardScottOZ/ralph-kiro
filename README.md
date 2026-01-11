@@ -78,6 +78,8 @@ brew install kiro-cli
 kiro-cli --version
 ```
 
+> **⚠️ Important Note**: This workflow is an adaptation of the original Ralph Wiggum technique (designed for Claude Code) to work with Kiro CLI. The Kiro CLI agent system and commands may differ from those shown here. You may need to adjust the agent configurations in `.kiro/agents/` to match your Kiro CLI version's capabilities. Refer to [Kiro CLI documentation](https://kiro.dev/docs/cli/) for the latest agent configuration format.
+
 ### Step 2: Clone this Repository
 
 ```bash
