@@ -12,10 +12,32 @@ YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
+# Check for help flag
+if [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
+    echo "Ralph Wiggum Setup Script"
+    echo ""
+    echo "Usage: ./setup-ralph.sh <project-name>"
+    echo ""
+    echo "This script sets up a new project with the Ralph Wiggum workflow for Kiro CLI."
+    echo ""
+    echo "Example:"
+    echo "  ./setup-ralph.sh my-awesome-project"
+    echo ""
+    echo "The script will:"
+    echo "  - Create a new directory for your project"
+    echo "  - Initialize a git repository"
+    echo "  - Copy Kiro agent configurations"
+    echo "  - Copy template files (PROMPT.md, TODO.md, clarify-session.md)"
+    echo "  - Create a project README"
+    echo "  - Make an initial git commit"
+    exit 0
+fi
+
 # Check if project name is provided
 if [ -z "$1" ]; then
     echo -e "${RED}Error: Project name required${NC}"
     echo "Usage: ./setup-ralph.sh <project-name>"
+    echo "Use --help for more information"
     exit 1
 fi
 
