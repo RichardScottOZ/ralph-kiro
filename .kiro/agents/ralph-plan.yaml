@@ -177,7 +177,7 @@ instructions: |
   When ready to execute:
   
   # Basic loop
-  while :; do cat PROMPT.md | kiro-cli chat --mode script; done
+  while :; do cat PROMPT.md | kiro-cli chat --no-interactive -a; done
   
   # Safe loop with max iterations (recommended)
   See README.md for safe loop examples with iteration limits

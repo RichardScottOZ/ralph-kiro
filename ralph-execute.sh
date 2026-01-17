@@ -124,7 +124,7 @@ while [ $iteration -lt $MAX_ITERATIONS ]; do
     echo "=== Iteration $iteration - $(date) ===" >> "$LOG_FILE"
     
     # Execute kiro-cli with the prompt
-    output=$(cat "$PROMPT_FILE" | kiro-cli chat --mode script 2>&1) || {
+    output=$(cat "$PROMPT_FILE" | kiro-cli chat --no-interactive -a 2>&1) || {
         echo -e "${RED}Error: kiro-cli command failed${NC}"
         echo "$output"
         echo "ERROR: kiro-cli failed at iteration $iteration" >> "$LOG_FILE"

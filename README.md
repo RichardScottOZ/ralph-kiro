@@ -30,7 +30,7 @@
 Ralph Wiggum is an autonomous development technique created by **Geoffrey Huntley**. At its core, it's simple:
 
 ```bash
-while :; do cat PROMPT.md | kiro-cli chat --mode script ; done
+while :; do cat PROMPT.md | kiro-cli chat --no-interactive -a; done
 ```
 
 A bash loop that repeatedly feeds the same prompt to an AI agent until the task is complete.
@@ -148,7 +148,7 @@ my-project/
 ┌──────────────────────────────────────────────────────────────────────────────┐
 │                          PHASE 3: EXECUTE                                    │
 │                                                                              │
-│   Command: while :; do cat PROMPT.md | kiro-cli chat --mode script; done    │
+│   Command: while :; do cat PROMPT.md | kiro-cli chat --no-interactive -a; done    │
 │                                                                              │
 │   🔁 Ralph loop until complete                                               │
 │   → Pick task → Complete → Mark done → Repeat                                │
@@ -248,7 +248,7 @@ Run the Ralph loop until complete.
 
 ```bash
 # Simple bash loop
-while :; do cat PROMPT.md | kiro-cli chat --mode script; done
+while :; do cat PROMPT.md | kiro-cli chat --no-interactive -a; done
 ```
 
 ### Enhanced Loop with Completion Detection
@@ -256,7 +256,7 @@ while :; do cat PROMPT.md | kiro-cli chat --mode script; done
 ```bash
 # Loop that exits when "DONE" is detected
 while :; do 
-  output=$(cat PROMPT.md | kiro-cli chat --mode script)
+  output=$(cat PROMPT.md | kiro-cli chat --no-interactive -a)
   echo "$output"
   if echo "$output" | grep -q "DONE"; then
     echo "Task completed!"
@@ -274,7 +274,7 @@ iteration=0
 
 while [ $iteration -lt $max_iterations ]; do
   echo "Iteration $((iteration + 1))/$max_iterations"
-  output=$(cat PROMPT.md | kiro-cli chat --mode script)
+  output=$(cat PROMPT.md | kiro-cli chat --no-interactive -a)
   echo "$output"
   
   if echo "$output" | grep -q "DONE"; then
@@ -404,7 +404,7 @@ kiro-cli chat --agent ralph-plan
 
 # 4. Phase 3: Execute - run the autonomous loop
 while :; do 
-  output=$(cat PROMPT.md | kiro-cli chat --mode script)
+  output=$(cat PROMPT.md | kiro-cli chat --no-interactive -a)
   echo "$output"
   if echo "$output" | grep -q "DONE"; then
     break
@@ -433,7 +433,7 @@ This implementation adapts the original Ralph Wiggum workflow from Claude Code t
 
 1. **Agents instead of Commands**: Kiro CLI uses agent configurations instead of slash commands
 2. **Bash Loop**: Manual bash loop instead of built-in `/ralph-loop` command
-3. **Script Mode**: Use `--mode script` for non-interactive execution
+3. **Non-interactive Mode**: Use `--no-interactive -a` (`--trust-all-tools`) for autonomous execution
 4. **Grep for Completion**: Detect completion by grepping output for "DONE"
 5. **Manual Iteration Limit**: Build iteration limits into the bash loop
 
