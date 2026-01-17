@@ -124,7 +124,7 @@ iteration=0
 
 while [ $iteration -lt $max_iterations ]; do
   echo "Iteration $((iteration + 1))/$max_iterations"
-  output=$(cat PROMPT.md | kiro-cli chat --mode script)
+  output=$(cat PROMPT.md | kiro-cli chat --no-interactive -a)
   echo "$output"
   
   if echo "$output" | grep -q "DONE"; then

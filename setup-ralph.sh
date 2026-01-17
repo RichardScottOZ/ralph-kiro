@@ -161,7 +161,7 @@ Run the autonomous loop:
 
 \`\`\`bash
 # Basic loop
-while :; do cat PROMPT.md | kiro-cli chat --mode script; done
+while :; do cat PROMPT.md | kiro-cli chat --no-interactive -a; done
 
 # Safe loop with max iterations (recommended)
 max_iterations=50
@@ -169,7 +169,7 @@ iteration=0
 
 while [ \$iteration -lt \$max_iterations ]; do
   echo "Iteration \$((iteration + 1))/\$max_iterations"
-  output=\$(cat PROMPT.md | kiro-cli chat --mode script)
+  output=\$(cat PROMPT.md | kiro-cli chat --no-interactive -a)
   echo "\$output"
   
   if echo "\$output" | grep -q "DONE"; then

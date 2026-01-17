@@ -75,8 +75,9 @@ kiro-cli chat --agent ralph-plan
                    --log-file execution.log
 
 # Manual execution (basic loop)
+# Use --no-interactive with -a/--trust-all-tools for autonomous execution
 while :; do 
-  cat PROMPT.md | kiro-cli chat --mode script
+  cat PROMPT.md | kiro-cli chat --no-interactive -a
 done
 
 # Manual execution (safe loop with completion detection)
@@ -84,7 +85,7 @@ max_iterations=50
 iteration=0
 while [ $iteration -lt $max_iterations ]; do
   echo "Iteration $((iteration + 1))/$max_iterations"
-  output=$(cat PROMPT.md | kiro-cli chat --mode script)
+  output=$(cat PROMPT.md | kiro-cli chat --no-interactive -a)
   echo "$output"
   if echo "$output" | grep -q "DONE"; then
     echo "✅ Task completed!"

@@ -48,7 +48,7 @@ This repository provides a complete working setup of the Ralph Wiggum autonomous
 ### 3. Kiro CLI Integration
 - Custom agent configurations for Kiro CLI
 - Adapted commands for Kiro's agent system
-- Script mode support for non-interactive execution
+- Non-interactive mode support for autonomous execution (`--no-interactive -a`)
 - Bash loops as alternative to built-in loop commands
 
 ### 4. Developer Experience
@@ -64,7 +64,7 @@ The original Ralph Wiggum workflow was designed for Claude Code. Key adaptations
 
 | Original (Claude Code) | This Implementation (Kiro CLI) |
 |------------------------|--------------------------------|
-| `/ralph-loop` command | Bash loop with `kiro-cli chat --mode script` |
+| `/ralph-loop` command | Bash loop with `kiro-cli chat --no-interactive -a` |
 | `/ralph-clarify` command | `kiro-cli chat --agent ralph-clarify` |
 | `/ralph-plan` command | `kiro-cli chat --agent ralph-plan` |
 | `.claude/commands/*.md` | `.kiro/agents/*.yaml` |
