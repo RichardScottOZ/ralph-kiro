@@ -64,6 +64,7 @@ git init
 # Create directory structure
 echo -e "${YELLOW}Creating directory structure...${NC}"
 mkdir -p .kiro/agents
+mkdir -p docs/specs
 mkdir -p src
 
 # Copy agent configurations
@@ -142,11 +143,19 @@ This project was initialized with the Ralph Wiggum workflow for Kiro CLI.
 
 ## Workflow
 
-### Phase 1: Clarify
-Gather requirements through comprehensive questioning:
+### Phase 1: Clarify (Two Options)
 
+#### Option A: Ralph-Clarify - General requirements gathering
 \`\`\`bash
 kiro-cli chat --agent ralph-clarify
+\`\`\`
+
+#### Option B: Lisa - Feature specification interview (Recommended for new features)
+\`\`\`bash
+kiro-cli chat --agent lisa-plan
+# Describe your feature, Lisa will ask probing questions
+# Say "done" when ready to finalize
+# Output: docs/specs/{feature-slug}.md, .json, -progress.txt
 \`\`\`
 
 ### Phase 2: Plan
@@ -155,6 +164,8 @@ Convert requirements into execution files:
 \`\`\`bash
 kiro-cli chat --agent ralph-plan
 \`\`\`
+
+**OR** if you used Lisa, create PROMPT.md manually to reference the spec.
 
 ### Phase 3: Execute
 Run the autonomous loop:
@@ -185,8 +196,20 @@ done
 
 - \`PROMPT.md\` - Instructions for the execution phase
 - \`TODO.md\` - Task checklist
-- \`clarify-session.md\` - Requirements from clarification phase
+- \`clarify-session.md\` - Requirements from ralph-clarify phase
+- \`docs/specs/\` - Lisa specifications (if using Lisa)
 - \`.kiro/agents/\` - Kiro CLI agent configurations
+  - \`ralph-clarify.yaml\` - Requirements gathering agent
+  - \`ralph-plan.yaml\` - Planning agent
+  - \`lisa-plan.yaml\` - Feature specification interview agent
+
+## Agents
+
+**ralph-clarify**: Comprehensive requirements discovery (40-70 questions)  
+**lisa-plan**: Interactive specification interview for features (probing questions)  
+**ralph-plan**: Convert requirements/specs into execution files
+
+**Tip**: Use Lisa for new features, Ralph-Clarify for general projects.
 
 ## Learn More
 
@@ -240,11 +263,13 @@ echo -e "${GREEN}✅ Project setup complete!${NC}"
 echo ""
 echo -e "${BLUE}Next steps:${NC}"
 echo -e "  1. ${YELLOW}cd $PROJECT_NAME${NC}"
-echo -e "  2. ${YELLOW}kiro-cli chat --agent ralph-clarify${NC} - Gather requirements"
+echo -e "  2. Choose your workflow:"
+echo -e "     ${YELLOW}Option A (General):${NC} kiro-cli chat --agent ralph-clarify"
+echo -e "     ${YELLOW}Option B (Feature):${NC} kiro-cli chat --agent lisa-plan"
 echo -e "  3. ${YELLOW}kiro-cli chat --agent ralph-plan${NC} - Generate execution files"
 echo -e "  4. Run the execution loop (see README.md)"
 echo ""
 echo -e "${BLUE}Project structure:${NC}"
 tree -L 2 "$PROJECT_NAME" 2>/dev/null || find "$PROJECT_NAME" -maxdepth 2 -print | sed 's|[^/]*/| |g'
 echo ""
-echo -e "${GREEN}Happy coding with Ralph! 🤖${NC}"
+echo -e "${GREEN}Happy coding with Ralph & Lisa! 🤖💡${NC}"
