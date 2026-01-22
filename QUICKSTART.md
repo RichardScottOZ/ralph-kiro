@@ -12,8 +12,12 @@ cd ralph-kiro
 cd my-project
 
 # 3. Run the workflow
-# Phase 1: Clarify
+# Phase 1: Clarify (Choose one)
+# Option A: General requirements
 kiro-cli chat --agent ralph-clarify
+
+# Option B: Feature specification (Recommended for new features)
+kiro-cli chat --agent lisa-plan
 
 # Phase 2: Plan
 kiro-cli chat --agent ralph-plan
@@ -33,12 +37,14 @@ kiro-cli chat --agent ralph-plan
 # Manual setup
 mkdir my-project && cd my-project
 git init
-mkdir -p .kiro/agents src
+mkdir -p .kiro/agents docs/specs src
 cp /path/to/ralph-kiro/.kiro/agents/* .kiro/agents/
 cp /path/to/ralph-kiro/templates/* .
 ```
 
-### Phase 1: Clarify
+### Phase 1: Clarify (Two Options)
+
+#### Option A: Ralph-Clarify (General)
 
 ```bash
 # Interactive clarification
@@ -50,16 +56,64 @@ kiro-cli chat --agent ralph-clarify
 # - Results saved to clarify-session.md
 ```
 
+#### Option B: Lisa (Feature Specification)
+
+```bash
+# Interactive specification interview
+kiro-cli chat --agent lisa-plan
+
+# In the chat, describe your feature:
+# "I want to spec out a user authentication system"
+
+# What happens:
+# - Lisa asks probing, non-obvious questions
+# - Draft spec updated every 2-3 questions
+# - Say "done" or "finalize" to complete
+# - Generates: docs/specs/{feature-slug}.md, .json, -progress.txt
+
+# Example questions Lisa might ask:
+# - "How should the system handle concurrent login attempts?"
+# - "When authentication fails, should we rate-limit further attempts?"
+# - "Walk me through what happens when a session expires mid-transaction"
+```
+
+**When to use Lisa vs Ralph-Clarify:**
+- **Use Lisa**: Building a new feature, need technical spec with user stories
+- **Use Ralph-Clarify**: General projects, broader requirements gathering
+
 ### Phase 2: Plan
 
 ```bash
-# Generate execution files
+# From Ralph-Clarify output
 kiro-cli chat --agent ralph-plan
 
 # What happens:
 # - Reads clarify-session.md
 # - Generates PROMPT.md (instructions + guardrails)
 # - Generates TODO.md (task checklist)
+```
+
+**From Lisa spec:**
+If you used Lisa, create PROMPT.md manually:
+
+```markdown
+# PROMPT.md
+
+## Project
+Implement {feature} as specified in docs/specs/{feature-slug}.md
+
+## Requirements
+Read the full specification at docs/specs/{feature-slug}.md
+
+## Instructions
+1. Read the spec file for complete requirements
+2. Implement one user story at a time from the JSON spec
+3. After each story, run verification commands
+4. Update the JSON spec's "passes" field to true when complete
+5. Continue until all user stories pass
+
+## Completion
+When all user stories have "passes": true and tests pass, output: DONE
 ```
 
 ### Phase 3: Execute
@@ -102,12 +156,18 @@ my-project/
 ├── .kiro/
 │   └── agents/
 │       ├── ralph-clarify.yaml   # Clarify agent config
-│       └── ralph-plan.yaml      # Plan agent config
-├── clarify-session.md            # Requirements (from phase 1)
-├── PROMPT.md                     # Execution instructions (from phase 2)
-├── TODO.md                       # Task checklist (from phase 2)
-├── ralph-execution.log           # Execution log (from phase 3)
-└── src/                          # Your code (created in phase 3)
+│       ├── ralph-plan.yaml      # Plan agent config
+│       └── lisa-plan.yaml       # Lisa spec interview agent
+├── docs/
+│   └── specs/                   # Lisa specifications (if using Lisa)
+│       ├── {feature}.md         # Markdown spec
+│       ├── {feature}.json       # JSON user stories
+│       └── {feature}-progress.txt  # Progress tracking
+├── clarify-session.md           # Requirements (from ralph-clarify)
+├── PROMPT.md                    # Execution instructions (from phase 2)
+├── TODO.md                      # Task checklist (from phase 2)
+├── ralph-execution.log          # Execution log (from phase 3)
+└── src/                         # Your code (created in phase 3)
 ```
 
 ## 🔧 Configuration
@@ -143,8 +203,9 @@ LOG_FILE="ralph-execution.log"
 - Answer questions thoroughly
 - Provide examples when possible
 - Don't rush - good requirements save time later
-- Say "enough" when you're ready to move on
-- Aim for 40-70 questions for comprehensive coverage
+- **Ralph-Clarify**: Say "enough" when ready to move on (aim for 40-70 questions)
+- **Lisa**: Say "done" or "finalize" when you've covered enough detail
+- Lisa will ask more probing questions - embrace the depth!
 
 ### Plan Phase
 - Review generated PROMPT.md and TODO.md
@@ -232,7 +293,28 @@ grep "Iteration" ralph-execution.log | wc -l
 grep -i "error" ralph-execution.log
 ```
 
-## 🎓 When to Use Ralph
+## 🎓 When to Use What
+
+### Use Ralph-Clarify When:
+- Building a general project or system
+- Need flexible requirements gathering
+- Want broad coverage of project aspects
+- Requirements are unclear or exploratory
+
+### Use Lisa When:
+- Building a specific new feature
+- Need detailed technical specifications
+- Want structured user stories with acceptance criteria
+- Ready to hand off to Ralph for implementation
+- Want to challenge assumptions (use --first-principles)
+
+### Lisa + Ralph Workflow:
+1. **Lisa plans** - Generate comprehensive spec with user stories
+2. **Ralph does** - Implement spec autonomously using the loop
+
+**"Lisa plans. Ralph does."**
+
+## 🎓 When to Use Ralph (Execution)
 
 ### ✅ Good For
 - Large refactoring projects
@@ -295,10 +377,12 @@ grep -i "error" ralph-execution.log
 
 ## 📚 Learn More
 
-- **Original Concept**: https://ghuntley.com/ralph/
-- **Full Gist**: https://gist.github.com/Mburdo/ce99c9b08601aaf771efaabf1260d4c0
+- **Original Ralph Concept**: https://ghuntley.com/ralph/
+- **Original Gist**: https://gist.github.com/Mburdo/ce99c9b08601aaf771efaabf1260d4c0
+- **Lisa Plugin (Original)**: https://github.com/blencorp/lisa
 - **Kiro CLI Docs**: https://kiro.dev/docs/cli/
 - **This Repository**: https://github.com/RichardScottOZ/ralph-kiro
+- **Lisa Workflow Example**: See `examples/lisa-workflow-example.md`
 
 ## 🤝 Getting Help
 
