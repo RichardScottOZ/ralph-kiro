@@ -17,11 +17,13 @@ This repository provides a complete working setup of the Ralph Wiggum autonomous
 #### Agent Configurations (`.kiro/agents/`)
 - **ralph-clarify.yaml** - Agent for Phase 1: Requirements discovery through questioning
 - **ralph-plan.yaml** - Agent for Phase 2: Converting requirements to execution files
+- **lisa-plan.yaml** - Alternative Phase 1: Specification interview agent (adapted from blencorp/lisa)
 
 #### Templates (`templates/`)
 - **PROMPT.md** - Template for execution instructions with guardrails
 - **TODO.md** - Template for task checklist with priority levels
 - **clarify-session.md** - Template for capturing requirements
+- **lisa/spec-template.md** - Template for Lisa-generated specifications
 
 #### Scripts
 - **setup-ralph.sh** - Automated setup script for new projects
@@ -30,28 +32,44 @@ This repository provides a complete working setup of the Ralph Wiggum autonomous
 #### Examples (`examples/`)
 - **todo-api-example.md** - Complete walkthrough of building a REST API
 - **clarify-session-example.md** - Example of a comprehensive requirements session
+- **lisa-workflow-example.md** - Complete Lisa specification interview walkthrough
 
 ## Key Features
 
-### 1. Three-Phase Workflow
+### 1. Three-Phase Workflow (Two Options)
+
+**Option A: Ralph Workflow**
 - **Clarify**: Gather requirements through 40-70 structured questions
 - **Plan**: Convert requirements into actionable PROMPT.md and TODO.md
 - **Execute**: Autonomous loop that implements tasks until completion
 
-### 2. Safety Features
+**Option B: Lisa + Ralph Workflow** (Recommended for new features)
+- **Lisa Plans**: Conduct specification interview with probing questions
+- **Generate Spec**: Creates markdown spec, JSON user stories, progress tracking
+- **Ralph Does**: Autonomous implementation based on the specification
+
+### 2. Lisa Plugin Capability
+- Adapted from [blencorp/lisa](https://github.com/blencorp/lisa) plugin for Claude Code
+- Probing, non-obvious questions that reveal implementation details
+- Generates comprehensive specs with verifiable acceptance criteria
+- Structured JSON output with user stories for Ralph to track
+- Seamless handoff from specification to implementation
+- **"Lisa plans. Ralph does."**
+
+### 3. Safety Features
 - Max iteration limits to prevent infinite loops
 - Completion detection (looks for "DONE" in output)
 - Stuck detection (agent can signal when unable to proceed)
 - Comprehensive logging to ralph-execution.log
 - HARD STOP checkpoints in task list
 
-### 3. Kiro CLI Integration
+### 4. Kiro CLI Integration
 - Custom agent configurations for Kiro CLI
 - Adapted commands for Kiro's agent system
 - Non-interactive mode support for autonomous execution (`--no-interactive -a`)
 - Bash loops as alternative to built-in loop commands
 
-### 4. Developer Experience
+### 5. Developer Experience
 - One-command project setup
 - Interactive clarification process
 - Automated file generation
