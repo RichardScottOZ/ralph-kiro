@@ -7,7 +7,7 @@ The Lisa plugin capability has been successfully adapted from the [blencorp/lisa
 ## Files Created
 
 ### Agent Configuration
-- **`.kiro/agents/lisa-plan.yaml`** - Kiro CLI agent for conducting specification interviews
+- **`.kiro/agents/lisa-plan.json`** - Kiro CLI agent for conducting specification interviews
   - Adapted from Claude Code plugin format to Kiro YAML format
   - Includes comprehensive instructions for probing questions
   - Generates markdown specs, JSON user stories, and progress files
@@ -98,7 +98,7 @@ The Lisa → Ralph workflow:
 
 | Original (Claude Code) | Adapted (Kiro CLI) |
 |------------------------|-------------------|
-| `.claude/plugins/lisa/` | `.kiro/agents/lisa-plan.yaml` |
+| `.claude/plugins/lisa/` | `.kiro/agents/lisa-plan.json` |
 | `/lisa:plan` command | `kiro-cli chat --agent lisa-plan` |
 | Claude Code hooks | No hooks needed (Kiro CLI handles sessions) |
 | AskUserQuestion tool | Interactive chat (built into Kiro) |
@@ -149,9 +149,9 @@ while :; do cat PROMPT.md | kiro-cli chat --no-interactive -a; done
 ## Testing
 
 All agent configurations validated:
-- ✓ lisa-plan.yaml is valid YAML
-- ✓ ralph-clarify.yaml is valid YAML
-- ✓ ralph-plan.yaml is valid YAML
+- ✓ lisa-plan.json is valid JSON
+- ✓ ralph-clarify.json is valid JSON
+- ✓ ralph-plan.json is valid JSON
 - ✓ All file references in documentation exist
 - ✓ Examples are complete and accurate
 

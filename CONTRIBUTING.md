@@ -69,7 +69,7 @@ Have an idea to improve the workflow? Open an issue with:
 
 ### Agent Configurations
 
-When modifying `.kiro/agents/*.yaml`:
+When modifying `.kiro/agents/*.json`:
 - Test with real Kiro CLI
 - Ensure instructions are clear and specific
 - Add examples in comments

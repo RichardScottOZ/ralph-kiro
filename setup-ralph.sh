@@ -199,9 +199,9 @@ done
 - \`clarify-session.md\` - Requirements from ralph-clarify phase
 - \`docs/specs/\` - Lisa specifications (if using Lisa)
 - \`.kiro/agents/\` - Kiro CLI agent configurations
-  - \`ralph-clarify.yaml\` - Requirements gathering agent
-  - \`ralph-plan.yaml\` - Planning agent
-  - \`lisa-plan.yaml\` - Feature specification interview agent
+  - \`ralph-clarify.json\` - Requirements gathering agent
+  - \`ralph-plan.json\` - Planning agent
+  - \`lisa-plan.json\` - Feature specification interview agent
 
 ## Agents
 

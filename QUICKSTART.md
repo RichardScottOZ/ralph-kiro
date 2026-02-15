@@ -155,9 +155,9 @@ done
 my-project/
 ├── .kiro/
 │   └── agents/
-│       ├── ralph-clarify.yaml   # Clarify agent config
-│       ├── ralph-plan.yaml      # Plan agent config
-│       └── lisa-plan.yaml       # Lisa spec interview agent
+│       ├── ralph-clarify.json   # Clarify agent config
+│       ├── ralph-plan.json      # Plan agent config
+│       └── lisa-plan.json       # Lisa spec interview agent
 ├── docs/
 │   └── specs/                   # Lisa specifications (if using Lisa)
 │       ├── {feature}.md         # Markdown spec
@@ -174,14 +174,14 @@ my-project/
 
 ### Kiro Agent Settings
 
-Edit `.kiro/agents/ralph-clarify.yaml`:
+Edit `.kiro/agents/ralph-clarify.json`:
 ```yaml
 settings:
   temperature: 0.7    # Higher for more creative questions
   max_tokens: 4000    # Increase if responses are cut off
 ```
 
-Edit `.kiro/agents/ralph-plan.yaml`:
+Edit `.kiro/agents/ralph-plan.json`:
 ```yaml
 settings:
   temperature: 0.5    # Lower for more consistent planning

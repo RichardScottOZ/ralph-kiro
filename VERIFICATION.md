@@ -11,8 +11,8 @@ This document verifies that all requirements have been met for the Ralph Wiggum 
 ### Deliverables Checklist
 
 #### Core Functionality
-- [x] Ralph Clarify agent configuration (`.kiro/agents/ralph-clarify.yaml`)
-- [x] Ralph Plan agent configuration (`.kiro/agents/ralph-plan.yaml`)
+- [x] Ralph Clarify agent configuration (`.kiro/agents/ralph-clarify.json`)
+- [x] Ralph Plan agent configuration (`.kiro/agents/ralph-plan.json`)
 - [x] Setup script for new projects (`setup-ralph.sh`)
 - [x] Execution script with safety features (`ralph-execute.sh`)
 - [x] Templates for all phases (`templates/*.md`)

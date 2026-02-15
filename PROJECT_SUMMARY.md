@@ -15,9 +15,9 @@ This repository provides a complete working setup of the Ralph Wiggum autonomous
 ### Core Components
 
 #### Agent Configurations (`.kiro/agents/`)
-- **ralph-clarify.yaml** - Agent for Phase 1: Requirements discovery through questioning
-- **ralph-plan.yaml** - Agent for Phase 2: Converting requirements to execution files
-- **lisa-plan.yaml** - Alternative Phase 1: Specification interview agent (adapted from blencorp/lisa)
+- **ralph-clarify.json** - Agent for Phase 1: Requirements discovery through questioning
+- **ralph-plan.json** - Agent for Phase 2: Converting requirements to execution files
+- **lisa-plan.json** - Alternative Phase 1: Specification interview agent (adapted from blencorp/lisa)
 
 #### Templates (`templates/`)
 - **PROMPT.md** - Template for execution instructions with guardrails
@@ -85,7 +85,7 @@ The original Ralph Wiggum workflow was designed for Claude Code. Key adaptations
 | `/ralph-loop` command | Bash loop with `kiro-cli chat --no-interactive -a` |
 | `/ralph-clarify` command | `kiro-cli chat --agent ralph-clarify` |
 | `/ralph-plan` command | `kiro-cli chat --agent ralph-plan` |
-| `.claude/commands/*.md` | `.kiro/agents/*.yaml` |
+| `.claude/commands/*.md` | `.kiro/agents/*.json` |
 | `<promise>DONE</promise>` tag | Plain text "DONE" detected by grep |
 | Built-in max iterations | Manual bash loop with counter |
 | AskUserQuestion tool | Interactive agent chat |
@@ -139,8 +139,8 @@ ralph-kiro/
 ├── ralph-execute.sh             # Execution loop script
 ├── .kiro/
 │   └── agents/
-│       ├── ralph-clarify.yaml   # Phase 1 agent
-│       └── ralph-plan.yaml      # Phase 2 agent
+│       ├── ralph-clarify.json   # Phase 1 agent
+│       └── ralph-plan.json      # Phase 2 agent
 ├── templates/
 │   ├── PROMPT.md                # Execution prompt template
 │   ├── TODO.md                  # Task list template
