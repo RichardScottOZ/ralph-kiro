@@ -175,17 +175,23 @@ my-project/
 ### Kiro Agent Settings
 
 Edit `.kiro/agents/ralph-clarify.json`:
-```yaml
-settings:
-  temperature: 0.7    # Higher for more creative questions
-  max_tokens: 4000    # Increase if responses are cut off
+```json
+{
+  "toolsSettings": {
+    "temperature": 0.7,
+    "max_tokens": 4000
+  }
+}
 ```
 
 Edit `.kiro/agents/ralph-plan.json`:
-```yaml
-settings:
-  temperature: 0.5    # Lower for more consistent planning
-  max_tokens: 4000
+```json
+{
+  "toolsSettings": {
+    "temperature": 0.5,
+    "max_tokens": 4000
+  }
+}
 ```
 
 ### Execution Script Settings

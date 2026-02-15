@@ -8,7 +8,7 @@ The Lisa plugin capability has been successfully adapted from the [blencorp/lisa
 
 ### Agent Configuration
 - **`.kiro/agents/lisa-plan.json`** - Kiro CLI agent for conducting specification interviews
-  - Adapted from Claude Code plugin format to Kiro YAML format
+  - Adapted from Claude Code plugin format to Kiro JSON format
   - Includes comprehensive instructions for probing questions
   - Generates markdown specs, JSON user stories, and progress files
 
